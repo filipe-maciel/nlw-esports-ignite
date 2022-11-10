@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import * as Dialog from '@radix-ui/react-dialog'
+
 import { GameBanner } from './components/GammeBanner'
 import { CreateAdBanner } from './components/CreateAdBanner'
 
@@ -18,7 +20,7 @@ function App() {
   const [games, setGames] = useState<Game[]>([])
 
   useEffect(() => {
-    fetch('http://localhost:3334/games')
+    fetch('http://localhost:3333/games')
       .then(response => response.json())
       .then(data => {
         setGames(data)
@@ -47,15 +49,63 @@ function App() {
         }
       </div>
 
-      <div className='pt-1 bg-nlw-gradient self-stretch rounded-lg overflow-hidden mt-8'>
+      <Dialog.Root>
         <CreateAdBanner 
           title="Não encontrou seu duo?" 
           subTitle="Publique um anúncio para encontrar novos players!"
           titleButton="Publicar anúncio"
-        />
-      </div>
+          />
+
+        <Dialog.Portal>
+          <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
+          
+          <Dialog.Content className="fixed bg-[#2A2634] py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg w-[480px] shadow-lg shadow-black/25" >
+            <Dialog.Title className="text-3xl font-black">Publique um anúncio</Dialog.Title>
+
+            <Dialog.Content>
+              <form>
+                <div>
+                  <label htmlFor="game">Qual o game?</label>
+                  <input id="game" type="text" placeholder="Selecione o game que deseja jogar" />
+                </div>
+
+                <div>
+                  <label htmlFor="game">Seu nome (ou nickname)</label>
+                  <input id="name" type="text" placeholder="Como te chamam dentro do game?" />
+                </div>
+
+                <div>
+                  <div>
+                    <label htmlFor="yearsPlayer">Joga há quantos anos?</label>
+                    <input id="yaersPlaying" type="text" placeholder="Pode estar iniciando :)" />
+                  </div>
+                  <div>
+                    <label htmlFor="discord">Qual seu discor?</label>
+                    <input id="discord" type="text" placeholder="Usuario#0000" />
+                  </div>
+                </div>
+
+                <div>
+                  <div>
+                    <label htmlFor="weekDays">Quando costuma jogar?</label>
+                  </div>
+                  <div>
+                    <label htmlFor="discord">Qual horário do dia?</label>
+                    <div>
+                      <input id="hourStart" type="time" placeholder="De" />
+                      <input id="hourEnd" type="time" placeholder="Até" />
+                    </div>
+                  </div>
+                </div>
+
+              </form>
+            </Dialog.Content>
+
+          </Dialog.Content>  
+        </Dialog.Portal>
+      </Dialog.Root>
     </div>
   )
 }
 
-export default App
+export default App          
