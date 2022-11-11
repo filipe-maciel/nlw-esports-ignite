@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
-import * as Dialog from '@radix-ui/react-dialog'
-
-import { GameBanner } from './components/GammeBanner'
-import { CreateAdBanner } from './components/CreateAdBanner'
+import { useState, useEffect } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
+import { GameBanner } from './components/GammeBanner';
+import { CreateAdBanner } from './components/CreateAdBanner';
+import { GameController } from 'phosphor-react';
+import { Input } from './components/Form/Input'
 
 import './styles/main.css';
 import logoImg from './assets/logo-nlw-eSports.svg';
@@ -62,44 +63,107 @@ function App() {
           <Dialog.Content className="fixed bg-[#2A2634] py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg w-[480px] shadow-lg shadow-black/25" >
             <Dialog.Title className="text-3xl font-black">Publique um anúncio</Dialog.Title>
 
-            <Dialog.Content>
-              <form>
-                <div>
-                  <label htmlFor="game">Qual o game?</label>
-                  <input id="game" type="text" placeholder="Selecione o game que deseja jogar" />
+              <form className="mt-8 flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="game" className="font-semibold">Qual o game?</label>
+                  <Input id="game" placeholder="Selecione o jogo que deseja jogar"/> 
                 </div>
 
                 <div>
-                  <label htmlFor="game">Seu nome (ou nickname)</label>
-                  <input id="name" type="text" placeholder="Como te chamam dentro do game?" />
+                  <label htmlFor="game" className="flex flex-col gap-2">Seu nome (ou nickname)</label>
+                  <Input id="name" placeholder="Como te chamam dentro do game?" />
                 </div>
 
-                <div>
-                  <div>
-                    <label htmlFor="yearsPlayer">Joga há quantos anos?</label>
-                    <input id="yaersPlaying" type="text" placeholder="Pode estar iniciando :)" />
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="yearsPlayer">Joga há quantos tempo?</label>
+                    <Input id="yaersPlaying" type="number" placeholder="Pode ser zero" />
                   </div>
-                  <div>
+                  <div className="flex flex-col gap-2">
                     <label htmlFor="discord">Qual seu discor?</label>
-                    <input id="discord" type="text" placeholder="Usuario#0000" />
+                    <Input id="discord" placeholder="Usuario#0000" />
                   </div>
                 </div>
 
-                <div>
-                  <div>
+                <div className="flex gap-6">
+                  <div className="flex flex-col gap-2">
                     <label htmlFor="weekDays">Quando costuma jogar?</label>
+
+                    <div className="grid grid-cols-4 gap-2">
+                      <button 
+                        title=""
+                        className="w-8 h-8 rounded bg-zinc-900"
+                      >
+                        D
+                      </button>
+                      <button 
+                        title=""
+                        className="w-8 h-8 rounded bg-zinc-900"
+                      >
+                        S
+                      </button>
+                      <button 
+                        title=""
+                        className="w-8 h-8 rounded bg-zinc-900"
+                      >
+                        T
+                      </button>
+                      <button 
+                        title=""
+                        className="w-8 h-8 rounded bg-zinc-900"
+                      >
+                        Q
+                      </button>
+                      <button 
+                        title=""
+                        className="w-8 h-8 rounded bg-zinc-900"
+                      >
+                        Q
+                      </button>
+                      <button 
+                        title=""
+                        className="w-8 h-8 rounded bg-zinc-900"
+                      >
+                        S
+                      </button>
+                      <button 
+                        title=""
+                        className="w-8 h-8 rounded bg-zinc-900"
+                      >
+                        S
+                      </button>
+                    </div>
                   </div>
-                  <div>
+                  <div className="flex flex-col gap-2" flex-1>
                     <label htmlFor="discord">Qual horário do dia?</label>
-                    <div>
-                      <input id="hourStart" type="time" placeholder="De" />
-                      <input id="hourEnd" type="time" placeholder="Até" />
+                    <div className="grid grid-cols-2 gap-2">
+                      <Input id="hourStart" type="time" placeholder="De" />
+                      <Input id="hourEnd" type="time" placeholder="Até" />
                     </div>
                   </div>
                 </div>
 
+                <div className="mt-2 flex gap-2 text-sm">
+                  <input type="checkbox" />
+                  Costumo me conectar ao chat de voz
+                </div>
+
+                <footer className="mt-4 flex justify-end gap-4">
+                  <Dialog.Close 
+                    className="bg-zinc-500 px-5 h-12 rounded-md font-semibold hover:bg-zinc-600"
+                  >
+                    Cancelar
+                  </Dialog.Close>
+                  <button 
+                    type="submit"
+                    className="bg-violet-500 px-5 h-12 rounded-md font-semibold flex items-center gap-3 hover:bg-violet-600"
+                  >
+                    <GameController className="w-6 h-6"/>
+                    Encontrar duo
+                  </button>
+                </footer>
+
               </form>
-            </Dialog.Content>
 
           </Dialog.Content>  
         </Dialog.Portal>
