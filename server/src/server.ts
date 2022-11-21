@@ -26,8 +26,7 @@ app.get('/games', async (request, response) => {
       }
     }
   })
-
-
+  
   return response.json(games)
 });
 
@@ -99,4 +98,4 @@ app.get('/ads/:id/discord', async (request, response) => {
   })
 });
 
-app.listen(3333)
+app.listen(3335)
