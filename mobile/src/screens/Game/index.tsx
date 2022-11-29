@@ -27,7 +27,7 @@ export function Game() {
   }
 
   useEffect(() => {
-    fetch(`http://192.168.15.8:3335/games/${game.id}/ads`)
+    fetch(`http://192.168.15.12:3335/games/${game.id}/ads`)
     .then(response => response.json())
     .then(data => setDuos(data));
   }, [])
